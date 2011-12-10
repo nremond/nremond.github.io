@@ -1,0 +1,6 @@
+sitename: The zen programmer
+author: Nicolas Rémond
+pygments: true
+baseurl: /
+permalink: ./:year/:month/:day/:title.html
+exclude: LICENSE, README

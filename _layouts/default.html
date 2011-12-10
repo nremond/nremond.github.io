@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <meta name="author" content="{{ author }}" />
+   
+   <title>{{ site.sitename }} - {{ site.author }}</title>
+
+   <link href="{{ site.baseurl }}atom.xml" rel="alternate" title="{{ site.author }}" type="application/atom+xml" />
+
+   <!-- Homepage CSS -->
+   <link rel="stylesheet" href="{{ site.baseurl }}css/screen.css" type="text/css" media="screen, projection" />
+   
+   <!-- Pygments CSS -->
+   <link rel="stylesheet" href="{{ site.baseurl }}css/pygments.css" type="text/css" media="screen, projection" />
+</head>
+<body>
+
+	<div class="site">
+	  <div class="title">
+		<a href="{{ site.baseurl }}" title="{{ site.sitename }}: Home">>{{ site.sitename }}</a>
+	  </div>
+	  
+	  {{ content }}
+	  
+	  <div class="footer">
+		<div class="contact">
+		  <p>
+			© {{ site.author }}
+		  </p>
+		</div>
+		<div class="contact">
+		  <p>
+			<a href="http://github.com/nire/">Github</a><br/>
+			<a href="http://ch.linkedin.com/in/nicolasremond">LinkedIn</a><br/>
+			<a href="http://flickr.com/n1r3/">Flickr</a><br/>
+			<a href="{{ site.baseurl }}atom.xml">RSS feed</a><br/>
+		  </p>
+		</div>
+
+		<div >
+			<p>
+		    	<a href="https://twitter.com/nremond" class="twitter-follow-button" data-show-count="false" data-lang="en" data-size="large">Follow @nremond</a>
+		    	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+			</p>
+		</div>	
+		<!--
+
+		
+		<div>
+			<a href="http://ch.linkedin.com/in/nicolasremond" >
+          		<img src="http://www.linkedin.com/img/webpromo/btn_viewmy_120x33.png" width="120" height="33" border="0" alt="View Nicolas  Rémond's profile on LinkedIn">
+    		</a>
+		</div>
+		-->
+		
+		<!--div class="rss">
+		  <a href="{{ site.baseurl }}atom.xml">
+			<img src="{{ site.baseurl }}images/rss.png" alt="Subscribe to RSS Feed" />
+		  </a>
+		</div-->
+		
+		
+       </p>
+	  </div>
+	</div>
+		
+	{% include analytics.html %}
+
+</body>
+</html>

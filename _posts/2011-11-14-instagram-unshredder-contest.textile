@@ -1,0 +1,35 @@
+---
+layout: post
+title: Instagram
+published: true
+comments: true
+categories: 
+- python
+---
+
+The engineers at Instagram put forward a challenge for coders to unshred this chopped up image. See the original post on their engineering blog : "Instagram Engineering Challenge: The Unshredder.":http://instagram-engineering.tumblr.com/post/12651721845/instagram-engineering-challenge-the-unshredder
+
+h3. The problem
+
+Here are the input and target output images:
+
+h5. The shredded version
+
+!http://media.tumblr.com/tumblr_luigsoCv3s1qm4rc3.png!
+
+h5. The unshredded version
+
+!http://media.tumblr.com/tumblr_luih7og6QM1qm4rc3.png!
+
+I wrote a solution in Python that resolves the problem; here is the basic idea of the algorithm :
+# define a correlation function for two pixel columns
+# start with a random shred
+# find the shred with the maximum correlation value that would fit on the left hand side or on the right hand side of the reconstructed picture
+# iterate until all the shreds have been used
+
+The bonus question was to guess how wide the uniform shreds are. I proceeded this way :
+# Consider all shreds width that can divide the image correctly
+# Compute the difference score between all shreds - it's the opposite of the correlation score used before and I also include a ratio of the shred_width
+# When we are on a edge between two sherds, the difference is at its maximum. So, take the maximum of all computed difference scores.
+
+For more details, see the code in my "repository on github":http://github.com/nire/instagram
