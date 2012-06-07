@@ -1,0 +1,40 @@
+---
+layout: post
+title: How to install a driver for a Canon network printer on Ubuntu 12.04 64bits
+published: true
+comments: true
+categories: 
+- linux
+---
+
+Being able to print something on a Canon network printer (C5030i) from an Ubuntu 64 bits machine could be quite a pain. I spend a bit of time to have it working and I'm keeping here my notes. 
+The community has been asking for a packaging for the Canon UFR II driver and some of the tricks listed here have been found in the comments of the Launchpad issue[1].
+
+# Start by downloading the official canon drivers, a zip file called o1113enx_l_ufr220.zip at this URL, "http://software.canon-europe.com/software/0040355.asp":http://software.canon-europe.com/software/0040355.asp
+# As there is no 64bits deb package, we gonna have to use the rpm files. Proceed as follow:
+{% highlight sh %}
+# convert to deb files
+sudo alien -d --scripts cndrvcups-ufr2-uk-2.2.20-1.x86_64.rpm
+sudo alien -d --scripts cndrvcups-common-2.20-1.x86_64.rpm
+# install the packages
+sudo dpkg -i cndrvcups-common_2.10-2_amd64.deb
+sudo dpkg -i cndrvcups-ufr2-uk_2.10-2_amd64.deb
+{% endhighlight %}
+# Now, you can install the printer, go to *SystemSettings > Printers > Add > NetworkPrinter* and then, when you have to choose the driver, select *Provide PPD file*. Select a ppd file from the @/usr/share/cups/model@ folder.
+# The issue is now that AppArmor is blocking the @/usr/lib64@ which is not standard on a Debian machine. So, edit @/etc/apparmor.d/local/usr.sbin.cupsd@ and add these lines
+{% highlight sh %}
+/usr/lib64/cups/backend/cnusb Uxr,
+/usr/lib64/cups/filter/pstoufr2cpca Uxr,
+{% endhighlight %}
+You should also do this so that the libraries can be found :
+{% highlight sh %}
+ln -s /usr/lib64/lib* /usr/lib/x86_64-linux-gnu/
+{% endhighlight %}
+# The last problem will be fixed by installing some 32bits libraries as the driver is not entirely compiled in 64bits.
+{% highlight sh %}
+sudo apt-get install ia32-libs libjpeg62:i386
+{% endhighlight %}
+
+p. Try to print a test page and enjoy.
+
+fn1. "https://bugs.launchpad.net/ubuntu/+bug/502920":https://bugs.launchpad.net/ubuntu/+bug/502920
