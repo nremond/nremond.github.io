@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Round the world photos
+title: Photos from our round the world trip
 published: true
 comments: true
 categories: 
