@@ -1,0 +1,13 @@
+---
+layout: post
+title: Gatling at the GenevaJUG
+published: true
+comments: true
+categories: 
+- scala
+- gatling
+---
+
+Last night was the second occasion for me to give a public presentation of Gatling ; an open-source load testing tool. I have been a contributer of the project for the last months after using it at work and have been very excited about it. I hope this presentation gave you a good idea of what the tool is capable of.
+
+{% speakerdeck b2c1bdf01bbc0130e63d22000a91824c %}
