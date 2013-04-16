@@ -1,0 +1,37 @@
+---
+layout: post
+title: Being prepared for traffic peaks with Gatling
+published: true
+comments: true
+categories: 
+- scala
+- gatling
+- scalability
+---
+
+I work in a ticketing company, where scaling is often difficult because of peaks in sales. For example, the traffic on ticket shops dramatically increases when tickets for famous singers go on sale or when large theaters sell their annual subscriptions. 
+
+Yesterday, tickets for a famous french band went on sale. Let's have a look at the graph of the cumulative number of sales.
+
+!/images/gatling_injection/sales.png!
+
+This is quite a typical distribution when the opening time for sales has been advertized beforehand, most of the tickets are sold quite quickly.
+If we look at it more carefully, we can clearly see that there are two different parts in the graph:
+* in the first part, the number of sales increases very quickly and it seems that it follows a Heaviside function.
+* in the second part, the number of sales is linear.
+
+!/images/gatling_injection/sales_injections.png!
+
+Gatling 2-M1 was just released, with a completely new injection API. Now one can easily define some custom injection functions. Gatling also comes with some nice predefined functions which we are going to use to try to reproduce that distribution.
+
+Let's consider this code : 
+{% highlight scala %}
+setUp(scn.inject(dirac(2400 users).over(30 minutes),
+                 ramp(340 users) over (30 minutes))
+      .protocolConfig(httpConf))
+{% endhighlight %}
+
+It's now time to compare the simulated load with what we observed earlier : 
+!/images/gatling_injection/yetix_vs_heavysideramp_scaled.png!
+
+By trying to reproduce accuratly some patterns observed in production you definitely have the keys for making your website ready for high traffic.
