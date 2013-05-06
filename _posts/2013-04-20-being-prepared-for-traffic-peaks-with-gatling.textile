@@ -26,7 +26,7 @@ Gatling 2-M1 was just released, with a completely new injection API. Now one can
 
 Let's consider this code : 
 {% highlight scala %}
-setUp(scn.inject(dirac(2400 users).over(30 minutes),
+setUp(scn.inject(heaviside(2400 users).over(30 minutes),
                  ramp(340 users) over (30 minutes))
       .protocolConfig(httpConf))
 {% endhighlight %}
